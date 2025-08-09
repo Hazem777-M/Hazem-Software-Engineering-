@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hazem & Aymen - الروابط الأبدية</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+        }
+        
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #0d0d1a; /* لون أساسي غامق */
+        }
+
+        .content {
+            z-index: 1;
+            max-width: 900px;
+            padding: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #74ebd5, #9face6, #9ff3b5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnim 5s ease-in-out infinite;
+            background-size: 200% 200%;
+            transition: all 0.5s ease;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            animation: slideIn 1.5s ease-out 0.5s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 400;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            animation: slideIn 1.5s ease-out 1s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .cta {
+            margin-top: 40px;
+            animation: fadeIn 2s ease-in-out 1.5s forwards;
+            opacity: 0;
+        }
+
+        .cta a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 30px;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .cta a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+        }
+
+        .cta a:hover::before {
+            transform: scale(1.1);
+        }
+
+        .cta a:hover {
+            box-shadow: 0 0 25px rgba(159, 243, 181, 0.8);
+            border-color: transparent;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes gradientAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="background"></div>
+
+    <div class="content">
+        <h1> حازم وأيمن وضياء</h1>
+        <h2>الروابط الأبدية</h2>
+        <p>
+            حيث يلتقي الشغف بالصداقة، وتُصاغ الذكريات في أكواد من الإبداع.
+            <br>
+            هذه ليست مجرد قصة، بل رحلة لا تنتهي.
+        </p>
+        <div class="cta">
+            <a href="{% url 'about' %}">اكتشف عالمنا</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 2;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('background').appendChild(renderer.domElement);
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 8000;
+        const posArray = new Float32Array(particlesCount * 3);
+        const colorArray = new Float32Array(particlesCount * 3);
+
+        const color1 = new THREE.Color(0x9face6);
+        const color2 = new THREE.Color(0x74ebd5);
+
+        for (let i = 0; i < particlesCount * 3; i += 3) {
+            posArray[i] = (Math.random() - 0.5) * 10;
+            posArray[i + 1] = (Math.random() - 0.5) * 10;
+            posArray[i + 2] = (Math.random() - 0.5) * 10;
+
+            const randomColor = new THREE.Color();
+            randomColor.lerpColors(color1, color2, Math.random());
+            colorArray[i] = randomColor.r;
+            colorArray[i + 1] = randomColor.g;
+            colorArray[i + 2] = randomColor.b;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+        });
+
+        const particleMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particleMesh);
+
+        const mouse = new THREE.Vector2();
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            particleMesh.rotation.y += 0.0005;
+            particleMesh.rotation.x += 0.0003;
+
+            camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.05;
+            camera.position.y += (-mouse.y * 0.5 - camera.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

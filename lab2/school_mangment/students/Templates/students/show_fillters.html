@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>عرض المرشحات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 90%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            text-align: center; /* لتوسيط الزر والعنوان */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1a73e8;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            color: #333;
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.8;
+            background-color: #f7f9fb;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: right; /* لمحاذاة النص داخل الفقرات */
+        }
+
+        p span {
+            color: #1a73e8;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: #ffffff;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        .button:hover {
+            background-color: #155bb5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>التجربة مع الفلاتر</h1>
+
+        <h3>الاسم الأصلي: {{ fname }}</h3>
+
+        <hr>
+
+        <h3>التطبيق مع المرشحات:</h3>
+
+        <p>
+            <span style="font-weight: bold;">الاسم الافتراضي:</span> {{ fname | default:'Al-Omari' }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">الاسم بأحرف كبيرة:</span> {{ fname | upper }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">الاسم بأحرف صغيرة:</span> {{ fname | lower }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">أول حرف كبير:</span> {{ fname | capfirst }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">طول الاسم:</span> {{ fname | length }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">استخراج شريحة (slice:2):</span> {{ fname | slice:":2" }}
+        </p>
+        <p>
+            <span style="font-weight: bold;">إضافة نص:</span> {{ fname | add:" Al-Omari" }}
+        </p>
+        <a href="{%url 'index'%}" class="button">عودة للصفحة الرئيسية</a>
+    </div>
+</body>
+</html>

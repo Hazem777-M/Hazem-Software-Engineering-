@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>بيانات الطلاب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #e9f0f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            background-color: #ffffff;
+            overflow: hidden;
+            padding: 14px 20px;
+            text-align: right;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            
+        }
+
+        .nav a {
+            color: #4a5568;
+            padding: 12px 18px;
+            text-decoration: none;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background-color: #f1f5f9;
+            color: #2b6cb0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        h1 {
+            color: #2c5282;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-container input[type=text] {
+            padding: 12px 20px;
+            border: 1px solid #cbd5e0;
+            border-radius: 25px;
+            font-size: 1em;
+            width: 70%;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .search-container input[type=text]:focus {
+            outline: none;
+            border-color: #63b3ed;
+            box-shadow: 0 0 8px rgba(99, 179, 237, 0.4);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        th,
+        td {
+            border: none;
+            padding: 15px;
+            text-align: right;
+        }
+
+        th {
+            background-color: #2c5282;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        tr:hover td {
+            background-color: #ebf4ff;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .action-buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+
+        .action-buttons .edit {
+            background-color: #f6ad55;
+        }
+
+        .action-buttons .delete {
+            background-color: #e53e3e;
+        }
+
+        .action-buttons .marks {
+            background-color: #68d391;
+        }
+        .action-buttons .fillters {
+            background-color: #4299e1;
+        }
+        .action-buttons .check-button {
+            background-color: #9f7aea;
+        }
+        .action-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body >
+    <div class="nav">
+        <a href="/">الرئيسية</a>
+        <a href="/students/">الطلاب</a>
+        <a href="/admin/">الإدارة</a>
+        
+    </div>
+    <div class="container">
+        <h1>بيانات الطلاب</h1>
+        <div class="search-container">
+            <form action="#" method="get">
+                <input type="text" placeholder="البحث بالاسم أو الرقم..." name="search">
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>الاسم الأول</th>
+                    <th>الاسم الأخير</th>
+                    <th>العمر</th>
+                    <th>الجنس</th>
+                    <th>المرحلة الجامعية</th>
+                    <th>منتظم</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.first_name }}</td>
+                    <td>{{ student.last_name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.gender }}</td>
+                    <td>{{ student.university_level }}</td>
+                    <td>{{ student.is_regular }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="{% url 'update_student' %}" class="edit">تعديل</a>
+                            <a href="{% url 'delete_student' %}" class="delete">حذف</a>
+                            <a href="{% url 'show'%}" class="marks">درجات</a>
+                            <a href="{% url 'show_fillters' %}" class="fillters">فلتر</a>
+                            <a href="{% url 'check_age' student.id %}" class="check-button">فحص</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

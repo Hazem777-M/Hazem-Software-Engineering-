@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالمنا | حازم </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #3f51b5;
+            --secondary-color: #f06292;
+            --text-color: #ffffff;
+            --bg-color: #0d0d1a;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+            direction: rtl; /* لدعم اللغة العربية */
+        }
+        
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+            padding: 2rem;
+            padding-top: 100px; /* مسافة للـ nav bar */
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 20;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 10px var(--secondary-color);
+        }
+        
+        .content-panel {
+            width: 800px;
+            max-width: 95%;
+            margin: 2rem auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-shadow: none;
+        }
+
+        .clickable-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        .clickable-box:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .clickable-box h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .clickable-box p {
+            color: var(--text-color);
+            font-weight: 300;
+        }
+        
+        footer {
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <ul>
+            <li><a href="#our-story-panel" data-target="our-story-panel">قصتنا</a></li>
+            <li><a href="#friendship-panel" data-target="friendship-panel">الصداقة</a></li>
+            <li><a href="#projects-panel" data-target="projects-panel">المشاريع</a></li>
+            <li><a href="#challenges-panel" data-target="challenges-panel">الصعاب</a></li>
+        </ul>
+    </nav>
+    
+    <div class="main-content">
+        <div id="our-story-panel" class="content-panel">
+            <h2>قصتنا</h2>
+            <div class="clickable-box">
+                <h3>البداية الرائعة</h3>
+                <p>اجتمعنا في عالم البرمجة، حيث كانت الأسطر الأولى من الأكواد بمثابة الشرارة التي أوقدت صداقتنا. كانت لحظات مليئة بالتحدي والشغف، وبداية لمغامرة لا تُنسى.</p>
+            </div>
+            <div class="clickable-box">
+                <h3>رحلة الذكريات</h3>
+                <p>من ليالي السهر لكتابة الأكواد إلى المشاريع المشتركة التي تجاوزت توقعاتنا، كل ذكرى تحمل بصمة صداقتنا القوية وإصرارنا على تحقيق النجاح معًا.</p>
+            </div>
+        </div>
+
+        <div id="friendship-panel" class="content-panel">
+            <h2>الصداقة</h2>
+            <div class="clickable-box">
+                <h3>أكثر من مجرد زملاء</h3>
+                <p>صداقتنا تتجاوز حدود العمل؛ إنها مبنية على الثقة والاحترام والدعم المتبادل. نحن نؤمن بأن قوة الاتحاد تصنع المستحيل.</p>
+            </div>
+            <div class="clickable-box">
+                <h3>سند في كل الأوقات</h3>
+                <p>في لحظات الفرح والإنجاز، وفي أوقات التحدي والصعاب، كنا دائمًا السند والعون لبعضنا البعض، مما جعل روابطنا أقوى وأكثر متانة.</p>
+            </div>
+        </div>
+
+        <div id="projects-panel" class="content-panel">
+            <h2>المشاريع</h2>
+            <div class="clickable-box">
+                <h3>إبداعات مشتركة</h3>
+                <p>كل مشروع قمنا بتنفيذه كان بمثابة قصة نجاح تُروى، حيث اجتمعنا بأفكارنا ومهاراتنا لإنشاء حلول مبتكرة تركت بصمة في عالم التكنولوجيا.</p>
+            </div>
+            <div class="clickable-box">
+                <h3>طموحات المستقبل</h3>
+                <p>نحن نتطلع دائمًا إلى المستقبل بشغف وحماس، ونخطط لتنفيذ المزيد من المشاريع الرائدة التي تخدم مجتمعنا وتلهم الآخرين.</p>
+            </div>
+        </div>
+
+        <div id="challenges-panel" class="content-panel">
+            <h2>الصعاب</h2>
+            <div class="clickable-box">
+                <h3>تجاوز التحديات</h3>
+                <p>لم تخلُ رحلتنا من الصعاب، لكن بالإيمان والصبر والعمل الجاد، استطعنا تحويل كل عقبة إلى فرصة للنمو والتطور.</p>
+            </div>
+            <div class="clickable-box">
+                <h3>قوة الإصرار</h3>
+                <p> تعلمنا أن الإصرار هو مفتاح النجاح، وأن التحديات هي جزء طبيعي من أي رحلة نحو تحقيق الأحلام، وصداقتنا كانت دائمًا مصدر قوتنا.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 حازم وأيمن. كل الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Particle System
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 8000;
+        const posArray = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 50;
+        }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0xffffff,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        const particleMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particleMesh);
+
+        // 3D Objects for Sections
+        const panelPositions = {
+            'our-story-panel': { x: 10, y: 5, z: -10 },
+            'friendship-panel': { x: -10, y: -5, z: -10 },
+            'projects-panel': { x: 10, y: -5, z: -20 },
+            'challenges-panel': { x: -10, y: 5, z: -20 }
+        };
+        const panelObjects = {};
+        for (const [id, pos] of Object.entries(panelPositions)) {
+            const geometry = new THREE.BoxGeometry(4, 3, 0.1);
+            const material = new THREE.MeshBasicMaterial({ color: 0x9face6, wireframe: true, transparent: true, opacity: 0.5 });
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(pos.x, pos.y, pos.z);
+            scene.add(mesh);
+            panelObjects[id] = mesh;
+        }
+
+        // Camera initial position
+        camera.position.z = 10;
+
+        // Mouse interaction
+        const mouse = new THREE.Vector2();
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Handle menu clicks
+        const navLinks = document.querySelectorAll('nav a');
+        
+        // Add event listener to each link
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // إزالة e.preventDefault() للسماح بالانتقال التلقائي
+                
+                const targetPanelId = e.target.dataset.target;
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to the clicked link
+                e.target.classList.add('active');
+
+                // Animate camera to new position
+                const targetPosition = panelPositions[targetPanelId];
+                gsap.to(camera.position, {
+                    x: targetPosition.x * 0.8,
+                    y: targetPosition.y * 0.8,
+                    z: targetPosition.z + 10,
+                    duration: 1.5,
+                    ease: 'power3.inOut'
+                });
+                
+                gsap.to(camera.lookAt, {
+                    x: targetPosition.x,
+                    y: targetPosition.y,
+                    z: targetPosition.z,
+                    duration: 1.5,
+                    ease: 'power3.inOut'
+                });
+            });
+        });
+
+        // Animation loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            particleMesh.rotation.y += 0.0005;
+            particleMesh.rotation.x += 0.0003;
+            
+            // Mouse-based camera movement
+            camera.position.x += (mouse.x * 0.2 - camera.position.x) * 0.05;
+            camera.position.y += (-mouse.y * 0.2 - camera.position.y) * 0.05;
+
+            // Optional: Rotate the 3D panels
+            for (const id in panelObjects) {
+                panelObjects[id].rotation.x += 0.002;
+                panelObjects[id].rotation.y += 0.002;
+            }
+
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Set initial active link
+        document.querySelector('nav a[data-target="our-story-panel"]').classList.add('active');
+    </script>
+</body>
+</html>
